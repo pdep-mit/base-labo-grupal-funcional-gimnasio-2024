@@ -1,18 +1,32 @@
 module Library where
+import PdePreludat
+
+
+data Gimnasta = Gimnasta {
+    edad :: Number,
+    peso :: Number,
+    tonificacion :: Number
+} deriving (Show, Eq)
+
 
 ---------------------------
 -- Precalentamiento
 ---------------------------
 
--- 1. Declarar el tipo de dato Gimnasta
-
--- 2a. Explicitar el tipo de esta función en base al uso esperado:
--- recordá que los minutos serán un número entero.
-relax minutos gimnasta = gimnasta
-
--- 2b. Declarar la constante gimnastaDePrueba que debería ser de tipo Gimnasta
+-- 1a. Declarar la constante gimnastaDePrueba que debería ser de tipo Gimnasta
 -- para usarlo desde las pruebas (Spec.hs) y/o desde la consola
+gimnastaDePrueba :: Gimnasta
 gimnastaDePrueba = undefined
+
+-- 1b. Definir la funcion bajarDePeso que haga que un gimnasta baje tantos kilos
+-- como se indique por parametro
+bajarDePeso :: Number -> Gimnasta -> Gimnasta
+bajarDePeso kilos gimnasta = undefined
+
+-- 1c. Definir la funcion tonificar que haga que un gimnasta suba su tonificacion
+-- en un punto
+tonificar :: Gimnasta -> Gimnasta
+tonificar gimnasta = undefined
 
 -------------------------------------
 -- Punto 1: Gimnastas saludables
@@ -24,6 +38,3 @@ gimnastaDePrueba = undefined
 ---------------------------
 
 
----------------------------
--- Punto 3: Ejercicios
----------------------------

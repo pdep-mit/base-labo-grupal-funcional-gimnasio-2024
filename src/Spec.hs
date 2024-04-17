@@ -1,11 +1,21 @@
+module Spec where
+import PdePreludat
 import Library
 import Test.Hspec
 
-main :: IO ()
-main = hspec $ do
+correrTests :: IO ()
+correrTests = hspec $ do
     describe "Precalentamiento" $ do
-        it "El ejercicio relax no impacta al gimnasta" $ do
-           relax 60 gimnastaDePrueba `shouldBe` gimnastaDePrueba
+        it "El gimnasta de prueba esta definido y tiene 45 años" $ do
+           edad gimnastaDePrueba `shouldBe` 45
+        it "El gimnasta de prueba esta definido y pesa 89 kilos" $ do
+           peso gimnastaDePrueba `shouldBe` 89
+        it "El gimnasta de prueba esta definido y su tonificacion es 7" $ do
+           peso gimnastaDePrueba `shouldBe` 7
+        it "Cuando un gimnasta baja de peso queda con tantos kilos menos como se indique" $ do
+           bajarDePeso 3 gimnastaDePrueba `shouldBe` gimnastaDePrueba {peso = 86}
+        it "Cuando un gimnasta se tonifica aumenta en un punto su tonificacion" $ do
+           tonificar gimnastaDePrueba `shouldBe` gimnastaDePrueba {tonificacion = 7}
 
     describe "Punto 1: Gimnastas saludables" $ do
         it "Un gimnasta que pesa más de 100 kilos es obeso" $ do
@@ -24,5 +34,10 @@ main = hspec $ do
             -- Cambiar esto por la consulta y el valor esperado real
             True `shouldBe` False
         it "Un gimnasta con tonificación mayor a 5 que es obeso no está saludable" $ do
+            -- Cambiar esto por la consulta y el valor esperado real
+            True `shouldBe` False
+
+    describe "Punto 2: Quemar calorías" $ do
+        it "... descripcion del caso de prueba ..." $ do
             -- Cambiar esto por la consulta y el valor esperado real
             True `shouldBe` False

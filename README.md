@@ -1,7 +1,5 @@
 # Práctica de laboratorio: A Quemar Esas Grasitas
 
-**ATENCIÓN:** Esta práctica no será corregida. Más allá del feedback que puedan tener durante la clase, el objetivo es que vean luego los videos con las puestas en común donde se discuten posibles soluciones para cada punto, para que puedan comparar con la solución a la que llegaron.
-
  > :exclamation: Para trabajar con este repositorio, usando el protocolo HTTPS, git te va a pedir un usuario y contraseña. Tené en cuenta que como contraseña tenés que usar un **token personal** generado desde GitHub, **no tu contraseña de GitHub**.
  >
  > Incluso si ya creaste uno anteriormente para otros trabajos, se recomienda crear uno nuevo para trabajar en el laboratorio que puedas eliminar más tarde desde tu cuenta de GitHub sin problemas.
@@ -30,7 +28,7 @@
 
 Este proyecto cuenta con 2 archivos relevantes (además del `README.md` que estás viendo):
   - `src/Library.hs`: acá van las definiciones de funciones y tipos de datos que se piden para resolver la consigna.
-  - `test/Spec.hs`: acá se definen las pruebas automáticas.
+  - `src/Spec.hs`: acá se definen las pruebas automáticas.
 
 Cada vez que estén por empezar un punto, **leanlo completo** para entender bien lo que se busca lograr. Luego avancen de a poco, **testeando** a medida que trabajan sobre la solución, no dejen las pruebas para el final.
 
@@ -62,9 +60,9 @@ Para probar el programa manualmente (desde la consola de Haskell) corré el coma
 
 ### Testeo automático
 
-Esta práctica es más abierta y les da lugar para definir sus propias pruebas automáticas en base a lo que sería esperable que pase al usar las funciones que definan de acuerdo a la consigna.
+Esta práctica se vuelve gradualmente más abierta dando lugar para definir sus propias pruebas automáticas en base a lo que sería esperable que pase al usar las funciones que definan de acuerdo a la consigna.
 
-Además para los primeros puntos ya les proponemos qué testear, lo cual se indica en el título del test correspondiente.
+Para los primeros ejercicios ya hay una propuesta sobre qué testear, lo cual se indica en el título del test correspondiente.
 
 Por ejemplo, si hubiera un test de este estilo:
 
@@ -85,45 +83,39 @@ Se podría cambiar por algo así para validar lo que se pide:
 
 # Enunciado
 
-Se desea desarrollar un sistema para un popular gimnasio que permita predecir el efecto de los ejercicios que realizarían sus socios con las máquinas que dispone. Las máquinas tienen ciertos ejercicios de fábrica (algunos son customizables), los cuales pueden realizarse durante una cantidad de minutos determinada, y sirven para tonificar músculos y/o quemar calorías.
+Se desea desarrollar un sistema para un gimnasio que permita monitorear el estado físico de sus clientes.
 
-De cada gimnasta nos interesa saber su **edad**, su **peso** y su coeficiente de **tonificación**.
-
-> :warning: Para simplificar, representaremos esos valores con números enteros, por ese motivo cuando sea necesario hacer divisiones usaremos división entera `div`, para evitar problemas de tipos que no son relevantes a esta práctica.
-
-Los ejercicios que se pueden hacer en el gimnasio **los modelaremos con funciones** que dada una **cantidad de minutos** y un **gimnasta**, retorna al **gimnasta** luego de realizar dicho ejercicio.
-
-Un ejemplo simple de ejercicio en el cual el gimnasta no hace nada (y por ende queda igual que al principio sin importar cuánto tiempo lo realice) podría ser:
+De cada gimnasta nos interesa saber su **edad**, su **peso** y su coeficiente de **tonificación**. Tenemos el siguiente tipo de dato para modelar a los gimnastas:
 
 ```haskell
-relax minutos gimnasta = gimnasta
+data Gimnasta = Gimnasta {
+    edad :: Number,
+    peso :: Number,
+    tonificacion :: Number
+} deriving (Show, Eq)
 ```
 
 ## Precalentamiento :hotsprings:
 
 Resolver los siguientes puntos repartiendo el trabajo entre computadoras diferentes. El objetivo es que practiquen la mecánica de subir y bajar cambios con git mientras dan estos primeros pasos.
 
->  :bulb: Tengan en cuenta que el 2a y el 2b dependen del 1, el pero 2a y el 2b pueden resolverse en paralelo.
+En el archivo `src/Library.hs` definir las siguientes constantes y funciones:
 
-1. En el archivo `src/Library.hs` declarar el tipo de dato `Gimnasta` como crean conveniente.
+a. Declarar la constante `gimnastaDePrueba` que debería ser de tipo Gimnasta, tener 45 años, pesar 89 kilos y tener una tonificación de 7 puntos.
 
-    > :warning: Tengan en cuenta que debe ser posible comparar dos gimnastas por igualdad (typeclass `Eq`) para las validaciones de las pruebas automáticas y vamos a querer que puedan mostrarse (typeclass `Show`) para poder ver los resultados al hacer pruebas en la consola.
+b. Definir la funcion `bajarDePeso :: Number -> Gimnasta -> Gimnasta` que haga que un gimnasta baje tantos kilos como se indique por parametro.
 
-2. Una vez que exista el tipo de dato `Gimnasta`...
-
-    a. Explicitar el tipo de la función `relax`.
-
-    b. Declarar una constante `gimnastaDePrueba` para poder probar el programa, pueden crearlo con los valores que más les gusten ya que no serán relevantes.
+. Definir la funcion `tonificar :: Gimnasta -> Gimnasta` que haga que un gimnasta suba su tonificacion en un punto.
 
 ### Testing :white_check_mark:
 
-Recuerden que, luego de completar esta parte del ejercicio, el proyecto debería compilar y también debería dar verde la prueba de la sección **Precalentamiento**, donde se usa la función `relax` con el `gimnastaDePrueba` al correr `stack test`.
+Recuerden que, luego de completar esta parte del ejercicio, el proyecto debería compilar y también deberían dar verde las pruebas de la sección **Precalentamiento** al correr `stack test`, en las cuales se usan al `gimnastaDePrueba` y las funciones `bajarDePeso` y `tonificar`.
 
 ## Punto 1: Gimnastas saludables :ok_hand:
 
-Necesitamos saber si alguien está saludable, lo cual se cumple si no es obeso y tiene una tonificación mayor a 5. Alguien es obeso si pesa más de 100 kilos.
+Necesitamos saber si alguien está saludable, lo cual se cumple si no está obeso y tiene una tonificación mayor a 5. Alguien está obeso si pesa más de 100 kilos.
 
-En el archivo `src/Library.hs` definir las funciones para saber **si alguien es obeso** y **si alguien está saludable**.
+En el archivo `src/Library.hs` definir las funciones para saber **si alguien está obeso** y **si alguien está saludable**.
 
 > :bulb: Para repartirse el trabajo de este punto, incluyendo las pruebas automáticas a desarrollar, pueden subir un primer commit que sólo incluya el tipo de las 2 funciones a desarrollar, y una definición incompleta de cada función a modo de "placeholder", usando `undefined` en el cuerpo de la función.
 >
@@ -131,7 +123,7 @@ En el archivo `src/Library.hs` definir las funciones para saber **si alguien es 
 
 ### Testing :white_check_mark:
 
-En el archivo `test/Spec.hs` escribir las consultas para probar la solución y los resultados esperados de acuerdo al nombre de cada test, como se explica más arriba en la sección **Pruebas manuales y automáticas -> Testeo automático**.
+En el archivo `src/Spec.hs` escribir las consultas para probar la solución y los resultados esperados de acuerdo al nombre de cada test, como se explica más arriba en la sección **Pruebas manuales y automáticas -> Testeo automático**.
 
 > :bulb: Dado que cada gimnasta a usar para las pruebas tiene que cumplir con condiciones distintas de las demás, lo más conveniente es crear el gimnasta directamente en el test, en vez de declarar una constante particular como hicieron con `gimnastaDePrueba` para el primer test que ya venía definido.
 >
@@ -147,48 +139,6 @@ Hacer que una función para que un gimnasta queme una cantidad de calorías, y e
 
 ### Testing :white_check_mark:
 
-En el archivo `test/Spec.hs` escribir los tests que crean convenientes para este punto, dentro de un nuevo describe con título `"Punto 2: Quemar calorías"`.
+En el archivo `src/Spec.hs` escribir los tests que crean convenientes para este punto, dentro del describe con título `"Punto 2: Quemar calorías"`.
 
 > Para pensar :thought_balloon: ¿cuántos casos de prueba podrían ser necesarios para validar todos los caminos posibles?
-
-## Punto 3: Ejercicios :bicyclist:
-
-Ahora sí, a quemar esas grasitas!
-
-Desarrollar las funciones `pesas`, `caminataEnCinta`, `entrenamientoEnCinta`, `colina` y `montania` sabiendo que queremos usarlas para que un gimnasta ejercite. Más abajo se explica qué se espera de cada una de ellas.
-
-> :bulb: Recuerden de qué tipo se supone que son los ejercicios en general. En caso de que alguna de las funciones que se piden requiera más información, pueden tener más parámetros.
->
-> En ese caso, es preferible que esos parámetros adicionales los reciban primero. Más adelante explicaremos mejor el por qué :wink:
-
-Al igual que para el punto anterior, en el archivo `test/Spec.hs` definan los tests que crean convenientes para este punto, definiendo un nuevo describe con título `"Punto 3: Ejercicios"`.
-
-> :warning: Sobre todo para este punto, no dejen los tests para el final, acompañen el desarrollo con las pruebas. El desarrollo de software es un proceso iterativo. Si sólo hacen una iteración, todo se vuelve cuesta arriba :sweat_smile:
-
-### Levantar pesas  :muscle:
-
-Las **pesas** incrementan la tonificación del gimnasta en la décima parte de los kilos a levantar si el ejercicio se realiza por más de 10 minutos, sino nada.
-
-> :bulb: Asegúrense de abstraer aquellas ideas de dominio que tengan sentido por sí mismas y puedan reutilizarse en otros contextos.
-
-### Escalar :mount_fuji:
-
-La **colina** quema 2 calorías por minuto multiplicado por la inclinación de la colina.
-
-La **montaña** son 2 colinas sucesivas (cada una con la mitad de duración respecto de los minutos totales indicados), donde la segunda colina tiene una inclinación de 3 más que la inclinación inicial elegida. Además de hacer perder peso por las calorías quemadas por las colinas, este ejercicio incrementa en una unidad la tonificación del gimnasta.
-
-> :muscle: Desafío! La montaña, al ser una secuencia clara de operaciones, puede pensarse como una composición de funciones. Traten de pensarla en esos términos.
-
-### Ejercicios en cinta  :running:
-
-Cualquier ejercicio que se haga en una cinta quema calorías en función de la velocidad promedio alcanzada durante el ejercicio, quemando 1 caloría por la velocidad promedio por minuto.
-
-* La **caminata** es un ejercicio en cinta con velocidad constante de 5 km/h.
-* El **entrenamiento en cinta** arranca en 6 km/h y cada 5 minutos incrementa la velocidad en 1 km/h, con lo cual la velocidad máxima dependerá de los minutos de entrenamiento.
-
-> :muscle: Desafío! Hay muchas similitudes entre la caminata y el entrenamiento, porque ambos se basan en ejercitar en la cinta. Traten de pensar una abstracción más general para representar al ejercicio en cinta, y definir los dos ejercicios concretos pedidos en términos de esa otra idea.
-
-# Puestas en común
-
-- Puesta en común #1: En [este video](https://www.youtube.com/watch?v=wRygZMNpH0E) se explica la primer parte de esta práctica, incluyendo algunas variantes para encarar el punto 1.
-- Puesta en común #2: En [este video](https://www.youtube.com/watch?v=LApMSiF_fO8) se presenta una posible solución para los puntos 2 y 3.

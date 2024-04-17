@@ -1,3 +1,3 @@
-# Changelog for mn-funcional-kata01
+# Changelog for proyecto-test
 
 ## Unreleased changes
