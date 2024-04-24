@@ -11,11 +11,11 @@ correrTests = hspec $ do
         it "El gimnasta de prueba esta definido y pesa 89 kilos" $ do
            peso gimnastaDePrueba `shouldBe` 89
         it "El gimnasta de prueba esta definido y su tonificacion es 7" $ do
-           peso gimnastaDePrueba `shouldBe` 7
+           tonificacion gimnastaDePrueba `shouldBe` 7
         it "Cuando un gimnasta baja de peso queda con tantos kilos menos como se indique" $ do
            bajarDePeso 3 gimnastaDePrueba `shouldBe` gimnastaDePrueba {peso = 86}
         it "Cuando un gimnasta se tonifica aumenta en un punto su tonificacion" $ do
-           tonificar gimnastaDePrueba `shouldBe` gimnastaDePrueba {tonificacion = 7}
+           tonificar gimnastaDePrueba `shouldBe` gimnastaDePrueba {tonificacion = 8}
 
     describe "Punto 1: Gimnastas saludables" $ do
         it "Un gimnasta que pesa más de 100 kilos es obeso" $ do
