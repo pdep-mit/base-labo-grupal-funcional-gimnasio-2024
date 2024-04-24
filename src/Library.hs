@@ -32,9 +32,15 @@ tonificar gimnasta = undefined
 -- Punto 1: Gimnastas saludables
 -------------------------------------
 
+estaObeso :: Gimnasta -> Bool 
+estaObeso = undefined
+
+estaSaludable :: Gimnasta -> Bool
+estaSaludable = undefined
 
 ---------------------------
 -- Punto 2: Quemar calorías
 ---------------------------
 
-
+quemarCalorias :: Number -> Gimnasta -> Gimnasta
+quemarCalorias = undefined

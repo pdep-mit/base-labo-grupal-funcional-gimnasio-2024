@@ -19,25 +19,28 @@ correrTests = hspec $ do
 
     describe "Punto 1: Gimnastas saludables" $ do
         it "Un gimnasta que pesa más de 100 kilos es obeso" $ do
-            -- Cambiar esto por la consulta y el valor esperado real
-            True `shouldBe` False
+            estaObeso gimnastaDePrueba {peso = 101} `shouldBe` True
         it "Un gimnasta que pesa menos de 100 kilos no es obeso" $ do
-            -- Cambiar esto por la consulta y el valor esperado real
-            True `shouldBe` False
+            estaObeso gimnastaDePrueba {peso = 99} `shouldBe` False
+        it "Un gimnasta que pesa 100 kilos no es obeso" $ do
+            estaObeso gimnastaDePrueba {peso = 100} `shouldBe` False
         it "Un gimnasta con tonificación menor a 5 que no es obeso no está saludable" $ do
-            -- Cambiar esto por la consulta y el valor esperado real
-            True `shouldBe` False
+            estaSaludable (gimnastaDePrueba {tonificacion = 4, peso = 70}) `shouldBe` False
         it "Un gimnasta con tonificación mayor a 5 que no es obeso está saludable" $ do
-            -- Cambiar esto por la consulta y el valor esperado real
-            True `shouldBe` False
+            estaSaludable (gimnastaDePrueba {tonificacion = 6, peso = 70}) `shouldBe` True
         it "Un gimnasta con tonificación menor a 5 que es obeso no está saludable" $ do
-            -- Cambiar esto por la consulta y el valor esperado real
-            True `shouldBe` False
+            estaSaludable (gimnastaDePrueba {tonificacion = 4, peso = 110}) `shouldBe` False
         it "Un gimnasta con tonificación mayor a 5 que es obeso no está saludable" $ do
-            -- Cambiar esto por la consulta y el valor esperado real
-            True `shouldBe` False
+            estaSaludable (gimnastaDePrueba {tonificacion = 7, peso = 110}) `shouldBe` False
 
     describe "Punto 2: Quemar calorías" $ do
-        it "... descripcion del caso de prueba ..." $ do
-            -- Cambiar esto por la consulta y el valor esperado real
-            True `shouldBe` False
+        it "Un gimnasta +30 que es obeso baja de peso proporcional a las calorías quemadas" $ do
+            peso (quemarCalorias 300 (gimnastaDePrueba {edad = 31, peso = 110})) `shouldBe` 108
+        it "Un gimnasta más joven que es obeso baja de peso proporcional a las calorías quemadas" $ do
+            peso (quemarCalorias 300 (gimnastaDePrueba {edad = 29, peso = 110})) `shouldBe` 110 - 300/(29*110)
+        it "Un gimnasta +30 que no es obeso baja 1 kilo cuando quema suficientes calorías" $ do
+            peso (quemarCalorias 201 (gimnastaDePrueba {edad = 31, peso = 90})) `shouldBe` 89
+        it "Un gimnasta más joven que no es obeso baja de peso en función a su peso y edad" $ do
+            peso (quemarCalorias 201 (gimnastaDePrueba {edad = 29, peso = 80})) `shouldBe` 80 - 201/(29*80)
+        it "Un gimnasta +30 que no es obeso baja de peso en función a su peso y edad cuando no quema suficientes calorías" $ do
+            peso (quemarCalorias 150 (gimnastaDePrueba {edad = 31, peso = 90})) `shouldBe` 110 - 150/(31*90)
