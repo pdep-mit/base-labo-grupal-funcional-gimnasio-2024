@@ -34,13 +34,11 @@ correrTests = hspec $ do
             estaSaludable (gimnastaDePrueba {tonificacion = 7, peso = 110}) `shouldBe` False
 
     describe "Punto 2: Quemar calorías" $ do
-        it "Un gimnasta +30 que es obeso baja de peso proporcional a las calorías quemadas" $ do
-            peso (quemarCalorias 300 (gimnastaDePrueba {edad = 31, peso = 110})) `shouldBe` 108
-        it "Un gimnasta más joven que es obeso baja de peso proporcional a las calorías quemadas" $ do
-            peso (quemarCalorias 300 (gimnastaDePrueba {edad = 29, peso = 110})) `shouldBe` 110 - 300/(29*110)
+        it "Un gimnasta que es obeso baja de peso proporcional a las calorías quemadas" $ do
+            peso (quemarCalorias 300 (gimnastaDePrueba {edad = 20, peso = 110})) `shouldBe` 108
         it "Un gimnasta +30 que no es obeso baja 1 kilo cuando quema suficientes calorías" $ do
             peso (quemarCalorias 201 (gimnastaDePrueba {edad = 31, peso = 90})) `shouldBe` 89
         it "Un gimnasta más joven que no es obeso baja de peso en función a su peso y edad" $ do
             peso (quemarCalorias 201 (gimnastaDePrueba {edad = 29, peso = 80})) `shouldBe` 80 - 201/(29*80)
         it "Un gimnasta +30 que no es obeso baja de peso en función a su peso y edad cuando no quema suficientes calorías" $ do
-            peso (quemarCalorias 150 (gimnastaDePrueba {edad = 31, peso = 90})) `shouldBe` 110 - 150/(31*90)
+            peso (quemarCalorias 150 (gimnastaDePrueba {edad = 31, peso = 90})) `shouldBe` 90 - 150/(31*90)

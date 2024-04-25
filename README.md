@@ -142,3 +142,14 @@ Hacer que una función para que un gimnasta queme una cantidad de calorías, y e
 En el archivo `src/Spec.hs` escribir los tests que crean convenientes para este punto, dentro del describe con título `"Punto 2: Quemar calorías"`.
 
 > Para pensar :thought_balloon: ¿cuántos casos de prueba podrían ser necesarios para validar todos los caminos posibles?
+
+# Nuevos requerimientos
+
+Queremos hacer que el gimnasta haga ejercicio. Hay distintas rutinas que necesitamos que se puedan hacer basadas en la quema de calorías
+y la tonificación.
+
+- Rutina 1: el gimnasta quema 200 calorías, luego aumenta en 1 su tonificación, luego quema 500 calorías.
+
+- Rutina 2: el gimnasta aumenta en 2 su tonificación, luego quema un total de calorías igual a 200 multiplicado por una cantidad de repeticiones que se indique por parámetro.
+
+- Rutina 3: el gimnasta realiza primero la rutina 1 y luego la rutina 2 con 3 repeticiones, luego nuevamente la rutina 1 y finalmente la 2 con 5 repeticiones.
